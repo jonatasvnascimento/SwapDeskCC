@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="SwapDeskCC.App.Views.ToastWindow"
+        Title="SwapDeskCC"
+        SystemDecorations="None"
+        Topmost="True"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        CanResize="False"
+        SizeToContent="WidthAndHeight"
+        Background="Transparent"
+        TransparencyLevelHint="Transparent">
+  <Border Name="Card" Classes="card" Margin="16" Width="330" Padding="14,14,16,14" Opacity="0"
+          BoxShadow="0 8 24 0 #33000000" Cursor="Hand">
+    <Border.Transitions>
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.25" />
+      </Transitions>
+    </Border.Transitions>
+    <Grid ColumnDefinitions="Auto,*">
+      <Border Name="Avatar" Width="34" Height="34" CornerRadius="17" VerticalAlignment="Top">
+        <TextBlock Name="AvatarText" Foreground="White" FontWeight="Bold" FontSize="13"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+      </Border>
+      <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+        <TextBlock Name="TitleText" FontWeight="SemiBold" FontSize="13" TextWrapping="Wrap" />
+        <TextBlock Name="SubText" Classes="small" />
+      </StackPanel>
+    </Grid>
+  </Border>
+</Window>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SwapDeskCC — esboço</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Controles do protótipo (não fazem parte do app) -->
+  <div class="proto-bar">
+    <span class="proto-label">Protótipo</span>
+    <div class="seg" id="platformSeg">
+      <button data-platform="windows" class="on">Windows</button>
+      <button data-platform="linux">Linux</button>
+    </div>
+    <div class="seg" id="themeSeg">
+      <button data-theme="light" class="on">Claro</button>
+      <button data-theme="dark">Escuro</button>
+    </div>
+  </div>
+
+  <div class="desktop" id="desktop">
+    <!-- Janela principal do app -->
+    <div class="window" id="window">
+      <div class="titlebar">
+        <div class="app-icon">⇄</div>
+        <span class="app-title">SwapDeskCC</span>
+        <div class="win-controls">
+          <span>—</span><span>▢</span><span class="close" id="closeWin">✕</span>
+        </div>
+      </div>
+
+      <div class="win-body">
+        <nav class="sidebar">
+          <button class="nav on" data-page="contas"><span>👥</span>Contas</button>
+          <button class="nav" data-page="config"><span>⚙️</span>Configurações</button>
+          <button class="nav" data-page="sobre"><span>ℹ️</span>Sobre</button>
+        </nav>
+
+        <main class="content">
+          <!-- Página: Contas -->
+          <section class="page on" id="page-contas">
+            <header class="page-head">
+              <div>
+                <h1>Contas</h1>
+                <p class="muted">Escolha qual conta o Claude vai usar.</p>
+              </div>
+              <button class="btn" id="addBtn">＋ Adicionar conta</button>
+            </header>
+
+            <div class="active-banner" id="activeBanner"></div>
+
+            <div class="scope">
+              <span class="muted">Trocar junto:</span>
+              <div class="seg" id="scopeSeg">
+                <button data-scope="both" class="on">Desktop + Code</button>
+                <button data-scope="desktop">Só Desktop</button>
+                <button data-scope="code">Só Code</button>
+              </div>
+            </div>
+
+            <div class="cards" id="cards"></div>
+
+            <h2>Atividade recente</h2>
+            <ul class="log" id="log"></ul>
+          </section>
+
+          <!-- Página: Configurações -->
+          <section class="page" id="page-config">
+            <header class="page-head"><div><h1>Configurações</h1></div></header>
+            <div class="settings">
+              <label class="row"><span><b>Iniciar com o sistema</b><small>Abre minimizado na bandeja</small></span><input type="checkbox" checked></label>
+              <label class="row"><span><b>Backup antes de cada troca</b><small>Mantém as 3 últimas cópias</small></span><input type="checkbox" checked></label>
+              <label class="row"><span><b>Notificação ao trocar</b><small>Mostra qual conta ficou ativa</small></span><input type="checkbox" checked></label>
+              <label class="row"><span><b>Reabrir o Claude após a troca</b></span><input type="checkbox" checked></label>
+              <div class="row"><span><b>Claude Desktop detectado</b><small id="detectedPath"></small></span><span class="pill ok">OK</span></div>
+              <div class="row"><span><b>Pasta de dados</b><small id="dataPath"></small></span><span class="pill" id="methodPill"></span></div>
+            </div>
+          </section>
+
+          <!-- Página: Sobre -->
+          <section class="page" id="page-sobre">
+            <header class="page-head"><div><h1>Sobre</h1></div></header>
+            <p>SwapDeskCC — alterne entre contas no Claude Desktop e no Claude Code.</p>
+            <p class="muted">Método não oficial. Atualizações do Claude podem mudar onde os dados ficam; mantenha backups.</p>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- Barra de tarefas com ícone na bandeja -->
+    <div class="taskbar" id="taskbar">
+      <div class="tb-left"><span class="tb-start" id="tbStart">⊞</span><span class="tb-app" id="tbApp" title="SwapDeskCC">⇄</span></div>
+      <div class="tb-right">
+        <button class="tray" id="trayBtn" title="SwapDeskCC"><span class="tray-icon">⇄</span><span class="tray-dot" id="trayDot"></span></button>
+        <span class="clock" id="clock"></span>
+      </div>
+      <div class="tray-menu" id="trayMenu"></div>
+    </div>
+
+    <!-- Toast de notificação -->
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <!-- Overlay da troca -->
+  <div class="overlay" id="overlay">
+    <div class="dialog">
+      <h3 id="swapTitle"></h3>
+      <ol class="steps" id="steps"></ol>
+      <div class="progress"><div id="progressBar"></div></div>
+    </div>
+  </div>
+
+  <!-- Diálogo: adicionar conta -->
+  <div class="overlay" id="addOverlay">
+    <form class="dialog" id="addForm">
+      <h3>Adicionar conta</h3>
+      <ol class="wizard muted">
+        <li>O SwapDeskCC fecha o Claude e guarda o perfil atual.</li>
+        <li>O Claude abre limpo — faça login na nova conta.</li>
+        <li>Volte aqui e clique em <b>Concluir</b>.</li>
+      </ol>
+      <label>Apelido<input name="name" required placeholder="Ex.: Freela"></label>
+      <label>E-mail (só para exibição)<input name="email" placeholder="voce@exemplo.com"></label>
+      <div class="swatches" id="swatches"></div>
+      <div class="actions">
+        <button type="button" class="btn ghost" id="cancelAdd">Cancelar</button>
+        <button type="submit" class="btn primary">Concluir</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

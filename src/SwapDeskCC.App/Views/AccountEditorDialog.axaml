@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SwapDeskCC.App.ViewModels"
+             x:Class="SwapDeskCC.App.Views.AccountEditorDialog"
+             x:DataType="vm:AccountEditorViewModel">
+  <Border Classes="dialog">
+    <StackPanel>
+      <TextBlock Classes="h3" Text="{Binding Title}" />
+
+      <StackPanel Spacing="2" Margin="0,0,0,14" IsVisible="{Binding IsAdding}">
+        <TextBlock Classes="small" Text="1. O SwapDeskCC fecha o Claude e guarda o perfil atual." />
+        <TextBlock Classes="small" Text="2. O Claude abre limpo — faça login na nova conta." />
+        <TextBlock Classes="small" Text="3. Para o Code, abra um terminal novo, rode claude e faça /login." />
+        <TextBlock Classes="small" Foreground="{DynamicResource WarnBrush}" Margin="0,6,0,0"
+                   IsVisible="{Binding IsSimulation}"
+                   Text="Modo simulação: a conta só entra na lista, nada é alterado." />
+      </StackPanel>
+      <TextBlock Classes="small" Margin="0,0,0,14" IsVisible="{Binding IsEditing}"
+                 Text="Muda só o que aparece no SwapDeskCC. O login e as pastas da conta continuam os mesmos." />
+
+      <TextBlock Text="Apelido" FontSize="13" Margin="0,0,0,4" />
+      <TextBox Name="NameBox" Text="{Binding Name}" Watermark="Ex.: Freela" Margin="0,0,0,10" />
+
+      <TextBlock Text="E-mail (só para exibição)" FontSize="13" Margin="0,0,0,4" />
+      <TextBox Text="{Binding Email}" Watermark="voce@exemplo.com" />
+
+      <TextBlock Text="Cor" FontSize="13" Margin="0,14,0,6" />
+      <ItemsControl ItemsSource="{Binding Colors}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Horizontal" Spacing="8" />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:ColorChoice">
+            <Button Classes="swatch" Classes.on="{Binding IsSelected}" Background="{Binding Brush}"
+                    Command="{Binding SelectCommand}" ToolTip.Tip="{Binding Hex}"
+                    AutomationProperties.Name="{Binding Hex}" />
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+      <!-- Cor personalizada: rgba(r, g, b, a) ou #hex, com prévia do avatar -->
+      <Grid ColumnDefinitions="*,Auto" Margin="0,10,0,0">
+        <TextBox Text="{Binding ColorText}" Watermark="rgba(201, 100, 66, 1)"
+                 AutomationProperties.Name="Cor personalizada" />
+        <Border Grid.Column="1" Width="34" Height="34" CornerRadius="17" Margin="10,0,0,0"
+                Background="{Binding PreviewBrush}" BorderBrush="{DynamicResource LineBrush}" BorderThickness="1">
+          <TextBlock Text="{Binding Initials}" Foreground="White" FontWeight="Bold" FontSize="13"
+                     HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+      </Grid>
+      <TextBlock Classes="small" Margin="0,4,0,16" IsVisible="{Binding !IsColorInvalid}"
+                 Text="Aceita rgba(r, g, b, a) com a entre 0 e 1, rgb(r, g, b) ou #hex." />
+      <TextBlock Classes="small" Margin="0,4,0,16" Foreground="{DynamicResource DangerBrush}"
+                 IsVisible="{Binding IsColorInvalid}"
+                 Text="Cor inválida. Exemplos: rgba(51, 103, 214, 0.8) · rgb(46, 125, 50) · #8e44ad" />
+
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+        <Button Classes="ghost" Content="Cancelar" Command="{Binding CancelCommand}" IsCancel="True" />
+        <Button Classes="primary" Content="{Binding ConfirmText}" Command="{Binding ConfirmCommand}" IsDefault="True" />
+      </StackPanel>
+    </StackPanel>
+  </Border>
+</UserControl>

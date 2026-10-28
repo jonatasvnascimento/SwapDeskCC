@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SwapDeskCC.App.ViewModels"
+             x:Class="SwapDeskCC.App.Views.SwapDialog"
+             x:DataType="vm:SwapProgressViewModel">
+  <Border Classes="dialog">
+    <StackPanel>
+      <TextBlock Classes="h3" Text="{Binding Title}" />
+      <ItemsControl ItemsSource="{Binding Steps}" Margin="0,0,0,16">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:StepViewModel">
+            <StackPanel Classes="step" Classes.running="{Binding IsRunning}" Classes.done="{Binding IsDone}"
+                        Classes.failed="{Binding IsFailed}" Orientation="Horizontal" Spacing="10" Margin="0,0,0,8">
+              <TextBlock Classes="icon" Text="{Binding Icon}" Width="18" TextAlignment="Center" FontSize="13" />
+              <StackPanel>
+                <TextBlock Classes="title" Text="{Binding Title}" FontSize="13" TextWrapping="Wrap" MaxWidth="360" />
+                <TextBlock Classes="small" Text="{Binding Note}" IsVisible="{Binding HasNote}" MaxWidth="360" />
+              </StackPanel>
+            </StackPanel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+      <ProgressBar Value="{Binding Progress}" Minimum="0" Maximum="1" Height="4" MinHeight="4" CornerRadius="2"
+                   Foreground="{DynamicResource AccentBrush}" Background="{DynamicResource Surface2Brush}"
+                   IsVisible="{Binding !HasError}" />
+
+      <StackPanel Spacing="12" IsVisible="{Binding HasError}">
+        <TextBlock Text="{Binding Error}" Foreground="{DynamicResource DangerBrush}" TextWrapping="Wrap" FontSize="13" />
+        <Button Content="Fechar" HorizontalAlignment="Right" Command="{Binding CloseCommand}" />
+      </StackPanel>
+    </StackPanel>
+  </Border>
+</UserControl>

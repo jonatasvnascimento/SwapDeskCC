@@ -1,0 +1,78 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SwapDeskCC.App.ViewModels"
+        xmlns:v="using:SwapDeskCC.App.Views"
+        x:Class="SwapDeskCC.App.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="SwapDeskCC"
+        Icon="/Assets/app.ico"
+        Width="900" Height="600" MinWidth="640" MinHeight="480"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        TransparencyLevelHint="Mica, AcrylicBlur, None"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="40">
+  <Panel>
+    <Border Name="Root" Classes="root" />
+
+    <DockPanel>
+      <!-- Barra de título (só quando a janela estende a área cliente: Windows) -->
+      <StackPanel DockPanel.Dock="Top" Height="40" Orientation="Horizontal" Spacing="10" Margin="14,0"
+                  IsHitTestVisible="False"
+                  IsVisible="{Binding $parent[Window].IsExtendedIntoWindowDecorations}">
+        <Image Source="/Assets/app.png" Width="18" Height="18" VerticalAlignment="Center" />
+        <TextBlock Text="SwapDeskCC" FontSize="13" VerticalAlignment="Center" />
+      </StackPanel>
+
+      <Grid ColumnDefinitions="190,*">
+        <!-- Barra lateral -->
+        <StackPanel Margin="6" Spacing="2">
+          <RadioButton Classes="nav" GroupName="nav" IsChecked="{Binding IsAccountsPage}" AutomationProperties.Name="Contas">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <PathIcon Data="{StaticResource IconPeople}" />
+              <TextBlock Text="Contas" />
+            </StackPanel>
+          </RadioButton>
+          <RadioButton Classes="nav" GroupName="nav" IsChecked="{Binding IsSettingsPage}" AutomationProperties.Name="Configurações">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <PathIcon Data="{StaticResource IconGear}" />
+              <TextBlock Text="Configurações" />
+            </StackPanel>
+          </RadioButton>
+          <RadioButton Classes="nav" GroupName="nav" IsChecked="{Binding IsAboutPage}" AutomationProperties.Name="Sobre">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <PathIcon Data="{StaticResource IconInfo}" />
+              <TextBlock Text="Sobre" />
+            </StackPanel>
+          </RadioButton>
+        </StackPanel>
+
+        <!-- Conteúdo -->
+        <Border Grid.Column="1" Background="{DynamicResource Surface2Brush}"
+                BorderBrush="{DynamicResource LineBrush}" BorderThickness="1,1,0,0"
+                CornerRadius="8,0,0,0" ClipToBounds="True">
+          <Panel>
+            <v:AccountsPage IsVisible="{Binding IsAccountsPage}" />
+            <Panel IsVisible="{Binding IsSettingsPage}">
+              <v:SettingsPage DataContext="{Binding Settings}" />
+            </Panel>
+            <Panel IsVisible="{Binding IsAboutPage}">
+              <v:AboutPage DataContext="{Binding Settings}" />
+            </Panel>
+          </Panel>
+        </Border>
+      </Grid>
+    </DockPanel>
+
+    <!-- Overlays -->
+    <Panel Classes="scrim" IsVisible="{Binding Swap.IsOpen}">
+      <v:SwapDialog DataContext="{Binding Swap}" />
+    </Panel>
+    <Panel Classes="scrim" IsVisible="{Binding Editor.IsOpen}">
+      <v:AccountEditorDialog DataContext="{Binding Editor}" />
+    </Panel>
+    <Panel Classes="scrim" IsVisible="{Binding Confirm.IsOpen}">
+      <v:ConfirmDialog DataContext="{Binding Confirm}" />
+    </Panel>
+  </Panel>
+</Window>

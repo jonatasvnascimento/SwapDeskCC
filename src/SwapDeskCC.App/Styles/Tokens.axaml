@@ -1,0 +1,57 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Mesmas cores do protótipo (teste/style.css) -->
+  <ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Light">
+      <Color x:Key="WinColor">#EBF3F3F3</Color>
+      <Color x:Key="WinSolidColor">#F3F3F3</Color>
+      <SolidColorBrush x:Key="WinBrush" Color="#EBF3F3F3" />
+      <SolidColorBrush x:Key="WinSolidBrush" Color="#F3F3F3" />
+      <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="Surface2Brush" Color="#F6F6F6" />
+      <SolidColorBrush x:Key="LineBrush" Color="#14000000" />
+      <SolidColorBrush x:Key="HoverBrush" Color="#0F000000" />
+      <SolidColorBrush x:Key="TextBrush" Color="#1B1B1B" />
+      <SolidColorBrush x:Key="MutedBrush" Color="#616161" />
+      <SolidColorBrush x:Key="OkBrush" Color="#0F7B0F" />
+      <SolidColorBrush x:Key="WarnBrush" Color="#9D5D00" />
+      <SolidColorBrush x:Key="ScrimBrush" Color="#59000000" />
+      <BoxShadows x:Key="CardShadow">0 20 50 0 #2E000000</BoxShadows>
+    </ResourceDictionary>
+    <ResourceDictionary x:Key="Dark">
+      <Color x:Key="WinColor">#EB202020</Color>
+      <Color x:Key="WinSolidColor">#202020</Color>
+      <SolidColorBrush x:Key="WinBrush" Color="#EB202020" />
+      <SolidColorBrush x:Key="WinSolidBrush" Color="#202020" />
+      <SolidColorBrush x:Key="SurfaceBrush" Color="#2B2B2B" />
+      <SolidColorBrush x:Key="Surface2Brush" Color="#252525" />
+      <SolidColorBrush x:Key="LineBrush" Color="#14FFFFFF" />
+      <SolidColorBrush x:Key="HoverBrush" Color="#0FFFFFFF" />
+      <SolidColorBrush x:Key="TextBrush" Color="#F3F3F3" />
+      <SolidColorBrush x:Key="MutedBrush" Color="#A8A8A8" />
+      <SolidColorBrush x:Key="OkBrush" Color="#6CCB5F" />
+      <SolidColorBrush x:Key="WarnBrush" Color="#FCE100" />
+      <SolidColorBrush x:Key="ScrimBrush" Color="#80000000" />
+      <BoxShadows x:Key="CardShadow">0 20 50 0 #80000000</BoxShadows>
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+
+  <Color x:Key="AccentColor">#C96442</Color>
+  <SolidColorBrush x:Key="AccentBrush" Color="#C96442" />
+  <SolidColorBrush x:Key="AccentHoverBrush" Color="#B8583A" />
+  <SolidColorBrush x:Key="AccentPressedBrush" Color="#A34E33" />
+  <SolidColorBrush x:Key="DangerBrush" Color="#C42B1C" />
+
+  <!-- O tema Fluent usa estas cores em checkbox, foco etc. -->
+  <Color x:Key="SystemAccentColor">#C96442</Color>
+  <Color x:Key="SystemAccentColorLight1">#D57A5C</Color>
+  <Color x:Key="SystemAccentColorLight2">#E09276</Color>
+  <Color x:Key="SystemAccentColorLight3">#EBAB92</Color>
+  <Color x:Key="SystemAccentColorDark1">#B8583A</Color>
+  <Color x:Key="SystemAccentColorDark2">#A34E33</Color>
+  <Color x:Key="SystemAccentColorDark3">#8C432C</Color>
+
+  <StreamGeometry x:Key="IconPeople">M16 17V19H2V17S2 13 9 13 16 17 16 17M12.5 7.5A3.5 3.5 0 1 0 9 11A3.5 3.5 0 0 0 12.5 7.5M15.94 13A5.32 5.32 0 0 1 18 17V19H22V17S22 13.37 15.94 13M15 4A3.39 3.39 0 0 0 13.07 4.59A5 5 0 0 1 13.07 10.41A3.39 3.39 0 0 0 15 11A3.5 3.5 0 0 0 15 4Z</StreamGeometry>
+  <StreamGeometry x:Key="IconGear">M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z</StreamGeometry>
+  <StreamGeometry x:Key="IconInfo">M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z</StreamGeometry>
+</ResourceDictionary>

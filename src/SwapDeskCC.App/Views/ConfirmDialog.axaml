@@ -1,0 +1,16 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SwapDeskCC.App.ViewModels"
+             x:Class="SwapDeskCC.App.Views.ConfirmDialog"
+             x:DataType="vm:ConfirmViewModel">
+  <Border Classes="dialog">
+    <StackPanel>
+      <TextBlock Classes="h3" Text="{Binding Title}" />
+      <TextBlock Text="{Binding Message}" FontSize="13" TextWrapping="Wrap" Margin="0,0,0,18" />
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+        <Button Classes="ghost" Content="Cancelar" Command="{Binding CancelCommand}" IsCancel="True" />
+        <Button Classes="primary" Content="{Binding ConfirmText}" Command="{Binding ConfirmCommand}" />
+      </StackPanel>
+    </StackPanel>
+  </Border>
+</UserControl>

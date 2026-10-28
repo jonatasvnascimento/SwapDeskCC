@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SwapDeskCC.App/SwapDeskCC.App.csproj" />
+    <Project Path="src/SwapDeskCC.Core/SwapDeskCC.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SwapDeskCC.Core.Tests/SwapDeskCC.Core.Tests.csproj" />
+  </Folder>
+</Solution>

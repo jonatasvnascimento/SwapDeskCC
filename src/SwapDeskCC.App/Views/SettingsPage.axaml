@@ -1,0 +1,104 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SwapDeskCC.App.ViewModels"
+             x:Class="SwapDeskCC.App.Views.SettingsPage"
+             x:DataType="vm:SettingsViewModel">
+  <ScrollViewer>
+    <StackPanel Margin="28,24">
+      <TextBlock Classes="h1" Text="Configurações" Margin="0,0,0,16" />
+
+      <Border Classes="row">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel>
+            <TextBlock Text="Iniciar com o sistema" FontWeight="SemiBold" />
+            <TextBlock Classes="small" Text="Abre minimizado na bandeja" />
+          </StackPanel>
+          <CheckBox Grid.Column="1" IsChecked="{Binding StartWithSystem}" AutomationProperties.Name="Iniciar com o sistema" />
+        </Grid>
+      </Border>
+
+      <Border Classes="row">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel>
+            <TextBlock Text="Backup antes de cada troca" FontWeight="SemiBold" />
+            <TextBlock Classes="small" Text="Mantém as 3 últimas cópias de cada conta (sem caches)" />
+          </StackPanel>
+          <CheckBox Grid.Column="1" IsChecked="{Binding BackupBeforeSwap}" AutomationProperties.Name="Backup antes de cada troca" />
+        </Grid>
+      </Border>
+
+      <Border Classes="row">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel>
+            <TextBlock Text="Notificação ao trocar" FontWeight="SemiBold" />
+            <TextBlock Classes="small" Text="Mostra qual conta ficou ativa" />
+          </StackPanel>
+          <CheckBox Grid.Column="1" IsChecked="{Binding NotifyOnSwap}" AutomationProperties.Name="Notificação ao trocar" />
+        </Grid>
+      </Border>
+
+      <Border Classes="row">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock Text="Reabrir o Claude após a troca" FontWeight="SemiBold" VerticalAlignment="Center" />
+          <CheckBox Grid.Column="1" IsChecked="{Binding ReopenAfterSwap}" AutomationProperties.Name="Reabrir o Claude após a troca" />
+        </Grid>
+      </Border>
+
+      <Border Classes="row">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel>
+            <TextBlock Text="Modo simulação" FontWeight="SemiBold" />
+            <TextBlock Classes="small" Text="Anima a troca sem mexer em arquivos. Desligue para trocar de verdade (pede confirmação e faz backup antes)." />
+          </StackPanel>
+          <CheckBox Grid.Column="1" IsChecked="{Binding SimulationMode}" AutomationProperties.Name="Modo simulação" />
+        </Grid>
+      </Border>
+
+      <Border Classes="row">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock Text="Tema" FontWeight="SemiBold" VerticalAlignment="Center" />
+          <Border Grid.Column="1" Classes="seg">
+            <StackPanel Orientation="Horizontal">
+              <RadioButton Classes="seg" GroupName="theme" Content="Sistema" IsChecked="{Binding IsThemeSystem}" />
+              <RadioButton Classes="seg" GroupName="theme" Content="Claro" IsChecked="{Binding IsThemeLight}" />
+              <RadioButton Classes="seg" GroupName="theme" Content="Escuro" IsChecked="{Binding IsThemeDark}" />
+            </StackPanel>
+          </Border>
+        </Grid>
+      </Border>
+
+      <Border Classes="row">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Margin="0,0,12,0">
+            <TextBlock Text="Claude Desktop detectado" FontWeight="SemiBold" />
+            <TextBlock Classes="small" Text="{Binding DetectedPath}" />
+          </StackPanel>
+          <Border Grid.Column="1" Classes="pill" Classes.ok="{Binding ClaudeFound}" Classes.warn="{Binding !ClaudeFound}">
+            <TextBlock Text="{Binding ClaudeStatus}" />
+          </Border>
+        </Grid>
+      </Border>
+
+      <Border Classes="row">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Margin="0,0,12,0">
+            <TextBlock Text="Pasta de dados" FontWeight="SemiBold" />
+            <TextBlock Classes="small" Text="{Binding DataPath}" />
+          </StackPanel>
+          <Border Grid.Column="1" Classes="pill">
+            <TextBlock Text="{Binding LinkMethod}" />
+          </Border>
+        </Grid>
+      </Border>
+
+      <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,12,0,0">
+        <Button Content="Abrir pasta de perfis" Command="{Binding OpenProfilesCommand}" />
+        <Button Content="Abrir backups" Command="{Binding OpenBackupsCommand}" />
+      </StackPanel>
+      <TextBlock Classes="small" Margin="0,8,0,0">
+        <Run Text="Configuração salva em " />
+        <Run Text="{Binding ConfigPath}" />
+      </TextBlock>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

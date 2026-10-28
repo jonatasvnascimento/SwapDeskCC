@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SwapDeskCC.App.ViewModels"
+             x:Class="SwapDeskCC.App.Views.AboutPage"
+             x:DataType="vm:SettingsViewModel">
+  <ScrollViewer>
+    <StackPanel Margin="28,24" Spacing="12">
+      <TextBlock Classes="h1" Text="Sobre" Margin="0,0,0,4" />
+      <StackPanel Orientation="Horizontal" Spacing="12">
+        <Image Source="/Assets/app.png" Width="40" Height="40" />
+        <StackPanel VerticalAlignment="Center">
+          <TextBlock Text="SwapDeskCC" FontWeight="SemiBold" />
+          <TextBlock Classes="small">
+            <Run Text="Versão " />
+            <Run Text="{Binding Version}" />
+          </TextBlock>
+        </StackPanel>
+      </StackPanel>
+      <TextBlock Text="SwapDeskCC — alterne entre contas no Claude Desktop e no Claude Code." TextWrapping="Wrap" />
+      <TextBlock Classes="muted" TextWrapping="Wrap"
+                 Text="Método não oficial. Atualizações do Claude podem mudar onde os dados ficam; mantenha backups." />
+      <TextBlock Classes="muted" TextWrapping="Wrap"
+                 Text="Antes de alternar contas para contornar limites de uso, confira os termos do seu plano." />
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>
